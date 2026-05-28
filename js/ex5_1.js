@@ -12,7 +12,7 @@ function mostrarLista() {
   var lista = "";
 
   // percorre vetor
-  for (i = 0; i < pacientes.length; i++) {
+  for (var i = 0; i < pacientes.length; i++) {
 
     lista += (i + 1) + ". ";
 
@@ -20,7 +20,19 @@ function mostrarLista() {
 
     lista += pacientes[i].especialidade + " - ";
 
-    lista += "R$ " + pacientes[i].valor.toFixed(2) + "\n";
+    lista += pacientes[i].pagamento + " - ";
+
+    lista += "R$ " + pacientes[i].valorFinal.toFixed(2);
+
+    // mostra parcelas
+    if (pacientes[i].parcelas > 1) {
+
+      lista += " (" + pacientes[i].parcelas + "x de R$ ";
+
+      lista += pacientes[i].valorParcela.toFixed(2) + ")";
+    }
+
+    lista += "\n";
   }
 
   // exibe lista
@@ -38,6 +50,8 @@ function adicionarPaciente() {
 
   var inValor = document.getElementById("inValor");
 
+  var inPagamento = document.getElementById("inPagamento");
+
 
   // obtém valores
   var nome = inPaciente.value;
@@ -45,6 +59,8 @@ function adicionarPaciente() {
   var especialidade = inEspecialidade.value;
 
   var valor = Number(inValor.value);
+
+  var pagamento = inPagamento.value;
 
 
   // valida nome
@@ -69,6 +85,37 @@ function adicionarPaciente() {
   }
 
 
+  // valor final
+  var valorFinal = valor;
+
+  var parcelas = 1;
+
+  var valorParcela = valor;
+
+
+  // desconto dinheiro ou pix
+  if (pagamento == "Dinheiro" || pagamento == "Pix") {
+
+    valorFinal = valor - (valor * 0.10);
+  }
+
+
+  // parcelamento crédito
+  if (pagamento == "Crédito") {
+
+    parcelas = Number(prompt("Parcelar em até 6x. Quantas parcelas?"));
+
+    if (parcelas < 1 || parcelas > 6 || isNaN(parcelas)) {
+
+      alert("Número de parcelas inválido");
+
+      return;
+    }
+
+    valorParcela = valorFinal / parcelas;
+  }
+
+
   // cria objeto paciente
   var paciente = {
 
@@ -76,7 +123,15 @@ function adicionarPaciente() {
 
     especialidade: especialidade,
 
-    valor: valor
+    pagamento: pagamento,
+
+    valor: valor,
+
+    valorFinal: valorFinal,
+
+    parcelas: parcelas,
+
+    valorParcela: valorParcela
   };
 
 
@@ -117,6 +172,8 @@ function adicionarUrgencia() {
 
   var inValor = document.getElementById("inValor");
 
+  var inPagamento = document.getElementById("inPagamento");
+
 
   // obtém valores
   var nome = inPaciente.value;
@@ -124,6 +181,8 @@ function adicionarUrgencia() {
   var especialidade = inEspecialidade.value;
 
   var valor = Number(inValor.value);
+
+  var pagamento = inPagamento.value;
 
 
   // valida nome
@@ -148,6 +207,37 @@ function adicionarUrgencia() {
   }
 
 
+  // valor final
+  var valorFinal = valor;
+
+  var parcelas = 1;
+
+  var valorParcela = valor;
+
+
+  // desconto dinheiro ou pix
+  if (pagamento == "Dinheiro" || pagamento == "Pix") {
+
+    valorFinal = valor - (valor * 0.10);
+  }
+
+
+  // parcelamento crédito
+  if (pagamento == "Crédito") {
+
+    parcelas = Number(prompt("Parcelar em até 6x. Quantas parcelas?"));
+
+    if (parcelas < 1 || parcelas > 6 || isNaN(parcelas)) {
+
+      alert("Número de parcelas inválido");
+
+      return;
+    }
+
+    valorParcela = valorFinal / parcelas;
+  }
+
+
   // cria objeto paciente
   var paciente = {
 
@@ -155,7 +245,15 @@ function adicionarUrgencia() {
 
     especialidade: especialidade,
 
-    valor: valor
+    pagamento: pagamento,
+
+    valor: valor,
+
+    valorFinal: valorFinal,
+
+    parcelas: parcelas,
+
+    valorParcela: valorParcela
   };
 
 
@@ -211,9 +309,22 @@ function atenderPaciente() {
 
     atender.nome + " - " +
 
-    atender.especialidade + " - R$ " +
+    atender.especialidade + " - " +
 
-    atender.valor.toFixed(2);
+    atender.pagamento + " - R$ " +
+
+    atender.valorFinal.toFixed(2);
+
+
+  // mostra parcelas se houver
+  if (atender.parcelas > 1) {
+
+    outAtendimento.textContent +=
+
+      " (" + atender.parcelas + "x de R$ " +
+
+      atender.valorParcela.toFixed(2) + ")";
+  }
 
 
   // atualiza lista
