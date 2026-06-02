@@ -1,4 +1,30 @@
 var pacientes = [];       // declara vetor global
+var urgencias = [];
+
+function atualizarLista() {
+  var outLista = document.getElementById("outLista");
+  var lista = "";
+
+  if (urgencias.length > 0) {
+    lista += "Urgências:\n";
+
+    for (var i = 0; i < urgencias.length; i++) {
+      lista += (i + 1) + ". " + urgencias[i] + " - URGÊNCIA\n";
+    }
+
+    lista += "\n";
+  }
+
+  if (pacientes.length > 0) {
+    lista += "Fila Normal:\n";
+
+    for (var i = 0; i < pacientes.length; i++) {
+      lista += (i + 1) + ". " + pacientes[i] + "\n";
+    }
+  }
+
+  outLista.textContent = lista;
+}
 
 function adicionarPaciente() {
   // cria referência aos elementos de entrada e saída de dados da página
@@ -50,7 +76,7 @@ function adicionarPaciente() {
 var btAdicionar = document.getElementById("btAdicionar");
 btAdicionar.addEventListener("click", adicionarPaciente);
 
-
+// Adicionar urgência
 function adicionarUrgencia() {
   // cria referência aos elementos de entrada e saída de dados da página
   var inPaciente = document.getElementById("inPaciente");
@@ -102,7 +128,7 @@ function adicionarUrgencia() {
 var btUrgencia = document.getElementById("btUrgencia");
 btUrgencia.addEventListener("click", adicionarUrgencia);
 
-
+// Atender paciente
 function atenderPaciente() {
   var inPaciente = document.getElementById("inPaciente");
 
@@ -114,10 +140,23 @@ function atenderPaciente() {
   }
 
   var outAtendimento = document.getElementById("outAtendimento");
-  var outLista = document.getElementById("outLista");
+  var atender;
 
-  var atender = pacientes.shift();
+  if (urgencias.length > 0) {
+    atender = urgencias.shift();
+  } else {
+    atender = pacientes.shift();
+  }
+
   outAtendimento.textContent = atender;
+
+  // adiciona ao histórico
+  historico.push({
+    nome: atender
+  });
+
+  // soma total
+  totalAtendimentos++;
 
   var lista = "";
   for (var i = 0; i < pacientes.length; i++) {
