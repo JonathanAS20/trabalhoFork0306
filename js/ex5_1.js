@@ -52,7 +52,6 @@ function atualizarLista() {
 
 // ADICIONAR PACIENTE NORMAL
 function adicionarPaciente() {
-<<<<<<< HEAD
 
   var inPaciente =
     document.getElementById("inPaciente");
@@ -61,7 +60,6 @@ function adicionarPaciente() {
     document.getElementById("inEspecialidade");
 
   var nome = inPaciente.value;
-=======
   // cria referência aos elementos de entrada e saída de dados da página
   var inPaciente = document.getElementById("inPaciente");
   var inDocumento = document.getElementById("inDocumento");
@@ -69,7 +67,6 @@ function adicionarPaciente() {
   
   var nome = inPaciente.value;           // obtém nome do paciente
   var documento = inDocumento.value.trim(); // obtém o documento (trim remove espaços vazios extras)
->>>>>>> upstream/main
 
   // verifica preenchimento do nome do paciente
   if (nome == "") {
@@ -79,18 +76,15 @@ function adicionarPaciente() {
     return;
   }
 
-<<<<<<< HEAD
   pacientes.push(
     nome + " - " + especialidade.value
   );
-=======
   // verifica se o documento foi preenchido E se tem menos de 5 dígitos
   if (documento !== "" && documento.length < 5) {
     alert("O documento deve conter no mínimo 5 dígitos!");
     inDocumento.focus();
     return;
   }
->>>>>>> upstream/main
 
   // Se o documento for preenchido (e for válido), junta com o nome
   var pacienteCompleto = nome;
@@ -115,7 +109,6 @@ function adicionarPaciente() {
   inDocumento.value = "";
   inPaciente.focus();
 }
-<<<<<<< HEAD
 
 var btAdicionar =
   document.getElementById("btAdicionar");
@@ -171,7 +164,7 @@ function adicionarUrgencia() {
     document.getElementById("inEspecialidade");
 
   var nome = inPaciente.value;
-=======
+}
 // cria referência ao btAdicionar e associa function ao evento click
 var btAdicionar = document.getElementById("btAdicionar");
 btAdicionar.addEventListener("click", adicionarPaciente);
@@ -185,7 +178,6 @@ function adicionarUrgencia() {
   
   var nome = inPaciente.value;           // obtém nome do paciente
   var documento = inDocumento.value.trim(); // obtém o documento
->>>>>>> upstream/main
 
   // verifica preenchimento do nome do paciente
   if (nome == "") {
@@ -195,18 +187,15 @@ function adicionarUrgencia() {
     return;
   }
 
-<<<<<<< HEAD
   urgencias.push(
     nome + " - " + especialidade.value
   );
-=======
   // NOVA VALIDAÇÃO: verifica se o documento foi preenchido E se tem menos de 5 dígitos
   if (documento !== "" && documento.length < 5) {
     alert("O documento deve conter no mínimo 5 dígitos!");
     inDocumento.focus();
     return;
   }
->>>>>>> upstream/main
 
   // Se o documento for preenchido, junta com o nome
   var pacienteCompleto = nome;
@@ -233,7 +222,6 @@ function adicionarUrgencia() {
   inDocumento.value = "";
   inPaciente.focus();
 }
-<<<<<<< HEAD
 
 var btUrgencia =
   document.getElementById("btUrgencia");
@@ -244,15 +232,12 @@ btUrgencia.addEventListener(
 );
 
 // ATENDER PACIENTE
-=======
 var btUrgencia = document.getElementById("btUrgencia");
 btUrgencia.addEventListener("click", adicionarUrgencia);
 
 // Atender paciente
->>>>>>> upstream/main
 function atenderPaciente() {
 
-<<<<<<< HEAD
   var inPaciente =
     document.getElementById("inPaciente");
 
@@ -266,11 +251,9 @@ function atenderPaciente() {
       "Não há pacientes na lista de espera"
     );
 
-=======
   // verifica se vetor pacientes está vazio 
   if (pacientes.length == 0) {
     alert("Não há pacientes na lista de espera");
->>>>>>> upstream/main
     inPaciente.focus();
     return;
   }
@@ -299,8 +282,8 @@ function atenderPaciente() {
   historico.push({
     nome: atender
   });
+}
 
-<<<<<<< HEAD
 var btAtender =
   document.getElementById("btAtender");
 
@@ -308,7 +291,6 @@ btAtender.addEventListener(
   "click",
   atenderPaciente
 );
-=======
   // soma total
   totalAtendimentos++;
 
@@ -321,4 +303,3 @@ btAtender.addEventListener(
 }
 var btAtender = document.getElementById("btAtender");
 btAtender.addEventListener("click", atenderPaciente);
->>>>>>> upstream/main
