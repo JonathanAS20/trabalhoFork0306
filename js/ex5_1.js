@@ -52,6 +52,7 @@ function atualizarLista() {
 
 // ADICIONAR PACIENTE NORMAL
 function adicionarPaciente() {
+<<<<<<< HEAD
 
   var inPaciente =
     document.getElementById("inPaciente");
@@ -60,7 +61,17 @@ function adicionarPaciente() {
     document.getElementById("inEspecialidade");
 
   var nome = inPaciente.value;
+=======
+  // cria referência aos elementos de entrada e saída de dados da página
+  var inPaciente = document.getElementById("inPaciente");
+  var inDocumento = document.getElementById("inDocumento");
+  var outLista = document.getElementById("outLista");
+  
+  var nome = inPaciente.value;           // obtém nome do paciente
+  var documento = inDocumento.value.trim(); // obtém o documento (trim remove espaços vazios extras)
+>>>>>>> upstream/main
 
+  // verifica preenchimento do nome do paciente
   if (nome == "") {
 
     alert("Informe o nome do paciente");
@@ -68,15 +79,43 @@ function adicionarPaciente() {
     return;
   }
 
+<<<<<<< HEAD
   pacientes.push(
     nome + " - " + especialidade.value
   );
+=======
+  // verifica se o documento foi preenchido E se tem menos de 5 dígitos
+  if (documento !== "" && documento.length < 5) {
+    alert("O documento deve conter no mínimo 5 dígitos!");
+    inDocumento.focus();
+    return;
+  }
+>>>>>>> upstream/main
 
-  atualizarLista();
+  // Se o documento for preenchido (e for válido), junta com o nome
+  var pacienteCompleto = nome;
+  if (documento !== "") {
+    pacienteCompleto += " (Doc: " + documento + ")";
+  }
 
+  pacientes.push(pacienteCompleto);    // adiciona no final do vetor
+
+  var lista = "";          // string para concatenar pacientes
+
+  // percorre os elementos do vetor 
+  for (var i = 0; i < pacientes.length; i++) {
+    lista += (i + 1) + ". " + pacientes[i] + "\n";
+  }
+
+  // altera o conteúdo da tag outLista
+  outLista.textContent = lista;
+
+  // limpa os campos e posiciona cursor em inPaciente
   inPaciente.value = "";
+  inDocumento.value = "";
   inPaciente.focus();
 }
+<<<<<<< HEAD
 
 var btAdicionar =
   document.getElementById("btAdicionar");
@@ -132,7 +171,23 @@ function adicionarUrgencia() {
     document.getElementById("inEspecialidade");
 
   var nome = inPaciente.value;
+=======
+// cria referência ao btAdicionar e associa function ao evento click
+var btAdicionar = document.getElementById("btAdicionar");
+btAdicionar.addEventListener("click", adicionarPaciente);
 
+// Adicionar urgência
+function adicionarUrgencia() {
+  // cria referência aos elementos de entrada e saída de dados da página
+  var inPaciente = document.getElementById("inPaciente");
+  var inDocumento = document.getElementById("inDocumento");
+  var outLista = document.getElementById("outLista");
+  
+  var nome = inPaciente.value;           // obtém nome do paciente
+  var documento = inDocumento.value.trim(); // obtém o documento
+>>>>>>> upstream/main
+
+  // verifica preenchimento do nome do paciente
   if (nome == "") {
 
     alert("Informe o nome do paciente");
@@ -140,15 +195,45 @@ function adicionarUrgencia() {
     return;
   }
 
+<<<<<<< HEAD
   urgencias.push(
     nome + " - " + especialidade.value
   );
+=======
+  // NOVA VALIDAÇÃO: verifica se o documento foi preenchido E se tem menos de 5 dígitos
+  if (documento !== "" && documento.length < 5) {
+    alert("O documento deve conter no mínimo 5 dígitos!");
+    inDocumento.focus();
+    return;
+  }
+>>>>>>> upstream/main
 
-  atualizarLista();
+  // Se o documento for preenchido, junta com o nome
+  var pacienteCompleto = nome;
+  if (documento !== "") {
+    pacienteCompleto += " (Doc: " + documento + ")";
+  }
 
+  // adiciona paciente no início do vetor
+  pacientes.unshift(pacienteCompleto);
+
+  // string para concatenar pacientes
+  var lista = "";
+
+  // percorre os elementos do vetor 
+  for (var i = 0; i < pacientes.length; i++) {
+    lista += (i + 1) + ". " + pacientes[i] + "\n";
+  }
+
+  // altera o conteúdo da tag outLista
+  outLista.textContent = lista;
+
+  // limpa os campos e posiciona cursor em inPaciente
   inPaciente.value = "";
+  inDocumento.value = "";
   inPaciente.focus();
 }
+<<<<<<< HEAD
 
 var btUrgencia =
   document.getElementById("btUrgencia");
@@ -159,8 +244,15 @@ btUrgencia.addEventListener(
 );
 
 // ATENDER PACIENTE
+=======
+var btUrgencia = document.getElementById("btUrgencia");
+btUrgencia.addEventListener("click", adicionarUrgencia);
+
+// Atender paciente
+>>>>>>> upstream/main
 function atenderPaciente() {
 
+<<<<<<< HEAD
   var inPaciente =
     document.getElementById("inPaciente");
 
@@ -174,6 +266,11 @@ function atenderPaciente() {
       "Não há pacientes na lista de espera"
     );
 
+=======
+  // verifica se vetor pacientes está vazio 
+  if (pacientes.length == 0) {
+    alert("Não há pacientes na lista de espera");
+>>>>>>> upstream/main
     inPaciente.focus();
     return;
   }
@@ -198,9 +295,12 @@ function atenderPaciente() {
 
   outAtendimento.textContent = atender;
 
-  atualizarLista();
-}
+  // adiciona ao histórico
+  historico.push({
+    nome: atender
+  });
 
+<<<<<<< HEAD
 var btAtender =
   document.getElementById("btAtender");
 
@@ -208,3 +308,17 @@ btAtender.addEventListener(
   "click",
   atenderPaciente
 );
+=======
+  // soma total
+  totalAtendimentos++;
+
+  var lista = "";
+  for (var i = 0; i < pacientes.length; i++) {
+    lista += (i + 1) + ". " + pacientes[i] + "\n";
+  }
+
+  outLista.textContent = lista;
+}
+var btAtender = document.getElementById("btAtender");
+btAtender.addEventListener("click", atenderPaciente);
+>>>>>>> upstream/main

@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+img.normal { float: left; height: 300px; width: 300px; }
+img.alta { float: left; height: 420px; width: 300px; }
+h1 { border-bottom-style: inset; }  
+pre { font-size: 1.2em; }
+.fonteAzul { color: rgba(131, 92, 209, 0.897); }
+.oculta { display: none; }
+.exibe { display: inline; }
+.italico { font-style: italic; }
+=======
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: #f0f8ff;
@@ -73,3 +83,4 @@ button:hover {
   color: red;
   font-weight: bold;
 }
+>>>>>>> 2b2b6ae11e6ba02e15a4e301b17d2f02c7935b18
